@@ -1,0 +1,5 @@
+#!/bin/bash
+
+gp $(gp-summary | grep behind | awk '{print $4}')
+gp-summary
+
