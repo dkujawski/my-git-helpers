@@ -10,12 +10,9 @@ function git_pull() {
 }
 
 for repo in "$@"; do
-    for rp in ${REPOPATHS//:/ } 
-    do
-        if [ -e ${rp}/${repo} ]; then
-            git_pull ${rp}/${repo}
-        fi
-    done
+    if [ -e ${repo} ]; then
+        git_pull ${repo}
+    fi
 done
 
 

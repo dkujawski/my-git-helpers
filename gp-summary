@@ -51,7 +51,7 @@ function git_summary() {
         elif [[ "$git_status" =~ Untracked ]]; then
             # "Untracked" catches case where we have both untracked and uncommitted
             statusColour=$RED
-            status='untracked+uncommitted'
+            status='untrack+uncommit'
         else
             statusColour=$YELLOW
             status='uncommitted'
@@ -64,7 +64,7 @@ function git_summary() {
         else
             branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null || echo HEAD`)"
         fi
-        printf "${statusColour}%16s${RESET} %20s   %s\n" "$status" "$branch" "$shortDirname"
+        printf "${statusColour}%16s${RESET} %20s   %s\n" "$status" "$branch" "$1"
     fi
 }
 
@@ -73,7 +73,7 @@ do
     echo
     echo $repoPath
     echo
-    for d in ${repoPath}/* ; do
+    for d in $(find ${repoPath} -name "*git" -type d -exec dirname {} \;); do
         git_summary $d
     done
 done

@@ -37,7 +37,7 @@ do
     echo
     echo $repoPath
     echo
-    for d in ${repoPath}/* ; do
+    for d in $(find ${repoPath} -name "*git" -type d -exec dirname {} \;); do
         git_fetch_origin $d
     done
 done
